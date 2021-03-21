@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Calculator</title>
+</head>
+<body>
+<form th:action="@{calc}" th:object="${operation}" method="post">
+    <div class="form-group">
+        <label> First num :</label> <input type="text" class="form-control" placeholder="Enter first number" name="firstNum" th:field="*{firstNum}"/>
+        <p th:if="${#fields.hasErrors('firstNum')}" th:errors="*{firstNum}"></p>
+    </div>
+    <br>
+    <div class="form-group">
+        <label> Second num :</label> <input type="text" class="form-control" placeholder="Enter second number" name="secondNum" th:field="*{secondNum}"/>
+        <p th:if="${#fields.hasErrors('secondNum')}" th:errors="*{secondNum}"></p>
+    </div>
+    <br>
+    <div class="form-group">
+    <label> Operation :</label> <input type="text" class="form-control" placeholder="Enter operation" name="operation" th:field="*{operation}"/>
+    <p th:if="${#fields.hasErrors('operation')}" th:errors="*{operation}"></p>
+    </div>
+    <br>
+    <div><input type="submit" value="Calculate"/></div>
+    <br>
+    <a th:if="${operation.getFirstNum() != 0 && operation.getSecondNum() != 0 && operation.getOperation() != null}">
+        <p th:text="'Result: '+${operation.getResult()}"></p>
+    </a>
+</form>
+</body>
+</html>
